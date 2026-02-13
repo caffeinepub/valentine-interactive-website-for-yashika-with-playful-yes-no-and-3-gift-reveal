@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 15,
+  "projectStateVersion": 17,
   "summary": "Valentine-themed interactive website for girlfriend (Yashika) with pink UI, playful Yes/No interaction, multi-step gift reveal with balloons/photo animations, and final valentine message screen.",
   "architectural_notes": [
     "Photo assets should be added as static files under frontend/public/assets and referenced via the existing configuration/constants (asset filenames) for Gift 2 (her photos), Gift 3 (couple photos), and the final hero photo.",
@@ -8,7 +8,8 @@
     "Add the 3 new user-provided photos as static assets under frontend/public/assets and include their filenames in the Gift 2 (HER_PHOTOS) configuration/constants list so they render in Gift 2."
   ],
   "known_issues": [
-    "User reports Gift 2 photos are not appearing on the website; placeholder photos still show instead of the 3 user-provided photos (likely static assets/config not updated or deployment not serving them)."
+    "User reports Gift 2 photos are not appearing on the website; placeholder photos still show instead of the 3 user-provided photos (likely static assets/config not updated or deployment not serving them).",
+    "After Draft Version 7 deployment, Gift 2 photos still not found/loaded; user requests updating frontend/src/config/valentineContent.ts (HER_PHOTOS) and ensuring their photos render on the live site."
   ],
   "isFixRequest": true,
   "existing_features": [
@@ -239,6 +240,30 @@
       "summary": "Ensure the static image assets IMG_0131-1.jpeg, IMG_4617-1.jpeg, and IMG_0156-1.jpeg are present in frontend/public/assets/generated/ with exact matching filenames/case, and that they are actually served by the deployed site at /assets/generated/<filename> so the images load instead of triggering the SafeGeneratedImage fallback.",
       "reqIds": [
         "REQ-20"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Ensure the three user photo files for Gift 2 exist in the deployed frontend static assets folder at exactly these paths and filenames (case-sensitive):\n- frontend/public/assets/generated/IMG_0131-1.jpeg\n- frontend/public/assets/generated/IMG_4617-1.jpeg\n- frontend/public/assets/generated/IMG_0156-1.jpeg",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Verify and (if needed) correct Gift 2 configuration so the Gift 2 gallery is driven only by HER_PHOTOS and uses exactly these filenames in this order: ['IMG_0131-1.jpeg','IMG_4617-1.jpeg','IMG_0156-1.jpeg'] (no placeholder filenames).",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Rebuild and redeploy the frontend and validate on the live site that Gift 2 shows the three user photos (not the “Image not found” fallback).",
+      "reqIds": [
+        "REQ-24"
       ],
       "status": "pending"
     }

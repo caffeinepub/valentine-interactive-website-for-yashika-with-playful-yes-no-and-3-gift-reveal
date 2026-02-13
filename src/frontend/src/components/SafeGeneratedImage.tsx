@@ -15,6 +15,7 @@ export default function SafeGeneratedImage({
   aspectRatio = 'auto',
 }: SafeGeneratedImageProps) {
   const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   if (hasError) {
     return (
@@ -26,19 +27,36 @@ export default function SafeGeneratedImage({
         <p className="text-dark-pink font-semibold text-center">
           Image not found
         </p>
-        <p className="text-foreground/60 text-sm text-center mt-2">
+        <p className="text-foreground/60 text-sm text-center mt-2 break-all">
           {filename}
+        </p>
+        <p className="text-foreground/40 text-xs text-center mt-1">
+          Expected at: /assets/generated/{filename}
         </p>
       </div>
     );
   }
 
   return (
-    <img
-      src={`/assets/generated/${filename}`}
-      alt={alt}
-      className={className}
-      onError={() => setHasError(true)}
-    />
+    <>
+      {isLoading && (
+        <div
+          className={`flex items-center justify-center bg-light-pink/10 animate-pulse ${className}`}
+          style={{ aspectRatio }}
+        >
+          <p className="text-dark-pink/60">Loading...</p>
+        </div>
+      )}
+      <img
+        src={`/assets/generated/${filename}`}
+        alt={alt}
+        className={`${className} ${isLoading ? 'hidden' : ''}`}
+        onLoad={() => setIsLoading(false)}
+        onError={() => {
+          setIsLoading(false);
+          setHasError(true);
+        }}
+      />
+    </>
   );
 }

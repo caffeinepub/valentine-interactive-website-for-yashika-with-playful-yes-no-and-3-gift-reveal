@@ -1,18 +1,29 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T22:42:11.682Z",
+  "generatedAt": "2026-02-13T22:52:31.640Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
     "total": 3,
-    "implemented": 1,
+    "implemented": 0,
     "items": [
       {
-        "id": "REQ-19",
-        "summary": "Ensure Gift 2 (\"Beautiful You\") displays only the user-provided 3 photos (and no placeholder photos) by confirming the Gift 2 gallery is driven by HER_PHOTOS from frontend/src/config/valentineContent.ts and that HER_PHOTOS is exactly: ['IMG_0131-1.jpeg','IMG_4617-1.jpeg','IMG_0156-1.jpeg'] in that order.",
+        "id": "REQ-22",
+        "summary": "Ensure the three user photo files for Gift 2 exist in the deployed frontend static assets folder at exactly these paths and filenames (case-sensitive):\n- frontend/public/assets/generated/IMG_0131-1.jpeg\n- frontend/public/assets/generated/IMG_4617-1.jpeg\n- frontend/public/assets/generated/IMG_0156-1.jpeg",
+        "status": "missing",
+        "plannedFiles": [
+          "frontend/public/assets/generated/IMG_0131-1.jpeg",
+          "frontend/public/assets/generated/IMG_4617-1.jpeg",
+          "frontend/public/assets/generated/IMG_0156-1.jpeg"
+        ],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-23",
+        "summary": "Verify and (if needed) correct Gift 2 configuration so the Gift 2 gallery is driven only by HER_PHOTOS and uses exactly these filenames in this order: ['IMG_0131-1.jpeg','IMG_4617-1.jpeg','IMG_0156-1.jpeg'] (no placeholder filenames).",
         "status": "missing",
         "plannedFiles": [
           "frontend/src/config/valentineContent.ts",
@@ -21,29 +32,14 @@
         "matchedFiles": []
       },
       {
-        "id": "REQ-20",
-        "summary": "Ensure the static image assets IMG_0131-1.jpeg, IMG_4617-1.jpeg, and IMG_0156-1.jpeg are present in frontend/public/assets/generated/ with exact matching filenames/case, and that they are actually served by the deployed site at /assets/generated/<filename> so the images load instead of triggering the SafeGeneratedImage fallback.",
+        "id": "REQ-24",
+        "summary": "Rebuild and redeploy the frontend and validate on the live site that Gift 2 shows the three user photos (not the “Image not found” fallback).",
         "status": "missing",
         "plannedFiles": [
-          "frontend/public/assets/generated/IMG_0131-1.jpeg",
-          "frontend/public/assets/generated/IMG_4617-1.jpeg",
-          "frontend/public/assets/generated/IMG_0156-1.jpeg",
-          "frontend/src/components/SafeGeneratedImage.tsx"
+          "frontend/scripts/retry-deploy-and-capture-logs.sh",
+          "frontend/DEPLOYMENT_RETRY_RUNBOOK.md"
         ],
         "matchedFiles": []
-      },
-      {
-        "id": "REQ-21",
-        "summary": "Rebuild and redeploy the frontend after verifying the assets and config so the latest static files are included, and validate in the live preview that Gift 2 shows the 3 user photos and no placeholder photos.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/DEPLOYMENT_RETRY_RUNBOOK.md",
-          "frontend/scripts/retry-deploy-and-capture-logs.sh"
-        ],
-        "matchedFiles": [
-          "frontend/DEPLOYMENT_RETRY_RUNBOOK.md",
-          "frontend/scripts/retry-deploy-and-capture-logs.sh"
-        ]
       }
     ]
   },
@@ -52,8 +48,7 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/DEPLOYMENT_RETRY_RUNBOOK.md",
-    "frontend/scripts/retry-deploy-and-capture-logs.sh",
+    "frontend/src/components/SafeGeneratedImage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -1,75 +1,70 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Fix Gift 2 photos rendering from HER_PHOTOS and ensure generated JPEG assets are served",
+  "title": "Fix Gift 2 photos not found by ensuring static assets and config match",
   "requirements": [
     {
-      "id": "REQ-19",
-      "summary": "Make Gift 2 (\"Beautiful You\") render exactly the three user-provided photos from HER_PHOTOS in the specified order, with no placeholder photo references used for Gift 2.",
+      "id": "REQ-22",
+      "summary": "Ensure the three Gift 2 user photo files exist in the deployed frontend static assets at the exact required paths and filenames",
       "acceptanceCriteria": [
-        "Gift 2 renders exactly 3 images (no placeholders) and they correspond to the 3 filenames in HER_PHOTOS, in order.",
-        "There are no other placeholder image filename references used for Gift 2 anywhere in the frontend code/config."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/config/valentineContent.ts",
-          "operation": "modify",
-          "description": "Verify HER_PHOTOS is exactly ['IMG_0131-1.jpeg','IMG_4617-1.jpeg','IMG_0156-1.jpeg'] in that order, and remove/avoid any Gift 2 placeholder filename usage in this config if present."
-        },
-        {
-          "path": "frontend/src/screens/GiftsScreen.tsx",
-          "operation": "modify",
-          "description": "Ensure the Gift 2 gallery is driven only by HER_PHOTOS (no hardcoded/placeholder arrays) and renders exactly the three items in order; audit and remove any Gift 2 placeholder filename references if present. Verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-20",
-      "summary": "Ensure the three JPEGs exist under frontend/public/assets/generated with exact filenames/case so they are served at /assets/generated/<filename> and do not trigger SafeGeneratedImage fallback.",
-      "acceptanceCriteria": [
-        "In the deployed app, directly opening each URL returns the image (not 404): /assets/generated/IMG_0131-1.jpeg, /assets/generated/IMG_4617-1.jpeg, /assets/generated/IMG_0156-1.jpeg.",
-        "When opening Gift 2 in the app, none of the three images show the \"Image not found\" fallback state."
+        "All three files exist in the repository at frontend/public/assets/generated/ with the exact filenames listed (including case and extension).",
+        "After deployment, each image is reachable by direct URL:\n- /assets/generated/IMG_0131-1.jpeg\n- /assets/generated/IMG_4617-1.jpeg\n- /assets/generated/IMG_0156-1.jpeg"
       ],
       "file_operations": [
         {
           "path": "frontend/public/assets/generated/IMG_0131-1.jpeg",
           "operation": "create",
-          "description": "Add/ensure the static asset exists with this exact filename and casing so it is served as a public static file at /assets/generated/IMG_0131-1.jpeg."
+          "description": "Add the provided user photo file to the frontend static assets at this exact path/filename (case-sensitive)."
         },
         {
           "path": "frontend/public/assets/generated/IMG_4617-1.jpeg",
           "operation": "create",
-          "description": "Add/ensure the static asset exists with this exact filename and casing so it is served as a public static file at /assets/generated/IMG_4617-1.jpeg."
+          "description": "Add the provided user photo file to the frontend static assets at this exact path/filename (case-sensitive)."
         },
         {
           "path": "frontend/public/assets/generated/IMG_0156-1.jpeg",
           "operation": "create",
-          "description": "Add/ensure the static asset exists with this exact filename and casing so it is served as a public static file at /assets/generated/IMG_0156-1.jpeg."
-        },
-        {
-          "path": "frontend/src/components/SafeGeneratedImage.tsx",
-          "operation": "modify",
-          "description": "Confirm the public-path mapping remains compatible with static hosting (expects /assets/generated/<filename>) and that Gift 2 loads the three JPEGs without triggering fallback; adjust only if needed to match the static asset location."
+          "description": "Add the provided user photo file to the frontend static assets at this exact path/filename (case-sensitive)."
         }
       ]
     },
     {
-      "id": "REQ-21",
-      "summary": "Update frontend deployment/build guidance to rebuild and redeploy with the verified assets/config and include a post-deploy validation checklist for Gift 2 and direct asset URLs.",
+      "id": "REQ-23",
+      "summary": "Verify Gift 2 is driven only by HER_PHOTOS and uses exactly the three required filenames in the required order (no placeholders)",
       "acceptanceCriteria": [
-        "After redeploy, Gift 2 shows the 3 user photos and no placeholder photos.",
-        "A quick post-deploy check confirms the three /assets/generated/*.jpeg URLs load successfully in the browser."
+        "frontend/src/config/valentineContent.ts exports HER_PHOTOS with exactly the three filenames in the required order and contains no placeholder photo entries for Gift 2.",
+        "Gift 2 (“Beautiful You”) renders exactly 3 images sourced from /assets/generated/<filename> using the HER_PHOTOS array."
       ],
       "file_operations": [
         {
-          "path": "frontend/DEPLOYMENT_RETRY_RUNBOOK.md",
+          "path": "frontend/src/config/valentineContent.ts",
           "operation": "modify",
-          "description": "Add a focused pre-deploy checklist (verify the three files exist under frontend/public/assets/generated with exact case) and a post-deploy validation checklist (open Gift 2 and directly load the three /assets/generated/*.jpeg URLs) to confirm latest static files are included."
+          "description": "Verify HER_PHOTOS is exactly ['IMG_0131-1.jpeg','IMG_4617-1.jpeg','IMG_0156-1.jpeg'] in that order, and ensure there are no placeholder/extra entries affecting Gift 2."
         },
+        {
+          "path": "frontend/src/screens/GiftsScreen.tsx",
+          "operation": "modify",
+          "description": "Verify Gift 2 (“Beautiful You”) renders its gallery exclusively from the HER_PHOTOS array (no hardcoded or placeholder filenames) and renders exactly one image per entry in that array."
+        }
+      ]
+    },
+    {
+      "id": "REQ-24",
+      "summary": "Add/adjust deployment validation steps so rebuild/redeploy can confirm Gift 2 photos load on the live site and capture failing asset URLs/statuses if not",
+      "acceptanceCriteria": [
+        "In the live deployment, opening Gift 2 (“Beautiful You”) shows the three user photos and does not show any “Image not found” fallback cards.",
+        "If any of the three images still fail to load, capture and provide the failing asset URL(s) and the browser network error/status for each."
+      ],
+      "file_operations": [
         {
           "path": "frontend/scripts/retry-deploy-and-capture-logs.sh",
           "operation": "modify",
-          "description": "Add a lightweight pre-build verification step that checks the presence of IMG_0131-1.jpeg, IMG_4617-1.jpeg, and IMG_0156-1.jpeg under frontend/public/assets/generated before building/deploying, to reduce redeploy cycles when assets are missing."
+          "description": "Enhance the post-deploy validation section to explicitly validate the three required asset URLs (/assets/generated/IMG_0131-1.jpeg, /assets/generated/IMG_4617-1.jpeg, /assets/generated/IMG_0156-1.jpeg) against the deployed canister base URL and capture HTTP status/errors in the log output for any failures."
+        },
+        {
+          "path": "frontend/DEPLOYMENT_RETRY_RUNBOOK.md",
+          "operation": "modify",
+          "description": "Complete and update the runbook to include explicit live-site verification steps for Gift 2, including direct checks of /assets/generated/IMG_0131-1.jpeg, /assets/generated/IMG_4617-1.jpeg, and /assets/generated/IMG_0156-1.jpeg, and instructions to record failing URL(s) and browser network status/errors if any do not load."
         }
       ]
     }

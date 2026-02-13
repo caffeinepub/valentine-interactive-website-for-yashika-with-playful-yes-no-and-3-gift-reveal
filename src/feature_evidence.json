@@ -1,24 +1,4 @@
 {
   "kind": "feature_evidence_report",
-  "features": [
-    {
-      "featureId": "feature-rebuild-and-redeploy-the-frontend-after-verifying-the-assets-and-config-so-the-latest-static-files-are-included-and-validate-in-the-live-preview-that-gift-2-shows-the-3-user-photos-and-no-placeholder-photos",
-      "featureTitle": "Rebuild and redeploy the frontend after verifying the assets and config so the latest static files are included, and validate in the live preview that Gift 2 shows the 3 user photos and no placeholder photos.",
-      "files": [
-        "frontend/DEPLOYMENT_RETRY_RUNBOOK.md",
-        "frontend/scripts/retry-deploy-and-capture-logs.sh"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-21"
-      ],
-      "confidence": "high"
-    }
-  ]
+  "features": []
 }
