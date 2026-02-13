@@ -1,49 +1,71 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-13T22:03:42.095Z",
-  "summary": "The diff adds an in-app help entry point on the Gifts screen via a dialog and introduces a SafeGeneratedImage component to provide graceful fallbacks for missing/broken images. However, due to truncation of GiftsScreen.tsx, some REQ-12 instruction details cannot be fully verified, and the fallback text formatting does not exactly match the example “Image not found: <filename>”.",
+  "generatedAt": "2026-02-13T22:42:11.680Z",
+  "summary": "Diff suggests Gift 2 photo filenames and the three required JPEG assets were added/updated, plus SafeGeneratedImage usage and deployment helper docs/scripts. However, the diff summary does not provide concrete evidence that Gift 2 is driven *only* by HER_PHOTOS in the exact required order, that all placeholder references for Gift 2 were removed, or that redeploy/live URL validation occurred.",
   "missing_requirements": [
     {
-      "id": "REQ-12",
-      "requirement": "Help instructions explicitly mention the config file and fields to edit: frontend/src/config/valentineContent.ts (HER_PHOTOS, COUPLE_PHOTOS, FINAL_COUPLE_PHOTO).",
-      "reason": "The GiftsScreen help dialog content is truncated before showing the referenced config file path and specific fields, so this cannot be confirmed from the provided diff summary.",
+      "id": "REQ-19",
+      "requirement": "Ensure Gift 2 (\"Beautiful You\") displays only the user-provided 3 photos driven by HER_PHOTOS from frontend/src/config/valentineContent.ts, and that HER_PHOTOS is exactly ['IMG_0131-1.jpeg','IMG_4617-1.jpeg','IMG_0156-1.jpeg'] in that order; no placeholder filename references used for Gift 2 anywhere.",
+      "reason": "The diff summary mentions valentineContent.ts includes the three photos, but does not show the actual HER_PHOTOS array contents/order, nor does it show removal of any placeholder filename references or how Gift 2 consumes the config.",
       "evidence": [
-        "frontend/src/screens/GiftsScreen.tsx (truncated)"
+        "frontend/src/config/valentineContent.ts (mentioned but content not shown)",
+        "frontend/src/screens/GiftsScreen.tsx (mentioned but content not shown)"
       ]
     },
     {
-      "id": "REQ-12",
-      "requirement": "Help instructions explicitly state that the app reads images from /assets/generated/<filename> (and to use exact filenames including extensions).",
-      "reason": "The dialog shows the folder path and mentions exact filenames, but the portion that would confirm an explicit statement about the runtime path pattern “/assets/generated/<filename>” is not visible due to truncation.",
+      "id": "REQ-20",
+      "requirement": "Ensure the static image assets IMG_0131-1.jpeg, IMG_4617-1.jpeg, and IMG_0156-1.jpeg are present in frontend/public/assets/generated/ and are actually served at /assets/generated/<filename> so Gift 2 images load (no SafeGeneratedImage fallback).",
+      "reason": "Presence of the three files is evidenced, but the diff summary cannot confirm that the deployed site serves them at the specified URLs (no build output/hosting config evidence) or that Gift 2 no longer triggers the fallback state.",
       "evidence": [
-        "frontend/src/screens/GiftsScreen.tsx (truncated)"
+        "frontend/public/assets/generated/IMG_0131-1.jpeg",
+        "frontend/public/assets/generated/IMG_4617-1.jpeg",
+        "frontend/public/assets/generated/IMG_0156-1.jpeg",
+        "frontend/src/components/SafeGeneratedImage.tsx (mentioned)"
       ]
     },
     {
-      "id": "REQ-13",
-      "requirement": "Fallback message for missing images should be an English message like “Image not found: <filename>”.",
-      "reason": "SafeGeneratedImage renders “Image not found” and then renders the filename on a separate line, rather than a single message in the form “Image not found: <filename>”. This may not meet the stated acceptance criteria phrasing.",
+      "id": "REQ-21",
+      "requirement": "Rebuild and redeploy the frontend and validate in live preview that Gift 2 shows the 3 user photos and no placeholders; confirm the three /assets/generated/*.jpeg URLs load post-deploy.",
+      "reason": "Code/docs changes can’t prove a rebuild/redeploy happened or that post-deploy URL checks were performed successfully; no deploy artifacts or runtime validation results are included in the diff summary.",
       "evidence": [
-        "frontend/src/components/SafeGeneratedImage.tsx"
+        "frontend/DEPLOYMENT_RETRY_RUNBOOK.md",
+        "frontend/scripts/retry-deploy-and-capture-logs.sh"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "LayoutShell update to import/use Heart icon correctly (general UI fix not requested by REQ-12/REQ-13).",
-      "reason": "The BuildRequest only asks for an in-app guide and graceful missing-image handling; a LayoutShell Heart icon import fix is unrelated to those requirements.",
+      "description": "Added a deployment retry runbook and an automated deploy/log-capture shell script.",
+      "reason": "The request asked to fix Gift 2 photos and redeploy/validate, but did not request adding new documentation/scripts; this may be considered extra scope beyond making the 3 photos appear correctly.",
       "evidence": [
-        "frontend-file-summaries.txt (mentions LayoutShell Heart icon import change)"
+        "frontend/DEPLOYMENT_RETRY_RUNBOOK.md",
+        "frontend/scripts/retry-deploy-and-capture-logs.sh"
+      ]
+    },
+    {
+      "description": "Introduced SafeGeneratedImage component and migrated multiple screens (e.g., GiftsScreen, FinalCelebrationScreen) to use it.",
+      "reason": "The request focuses on Gift 2 showing the provided photos; adding a new reusable fallback component and applying it outside Gift 2 (e.g., FinalCelebrationScreen) is additional functionality not explicitly requested (and potentially touches non-goal areas).",
+      "evidence": [
+        "frontend/src/components/SafeGeneratedImage.tsx",
+        "frontend/src/screens/GiftsScreen.tsx",
+        "frontend/src/screens/FinalCelebrationScreen.tsx"
+      ]
+    },
+    {
+      "description": "Added/kept an empty placeholder hook file (useQueries.ts) and scripts directory tracking (.gitkeep).",
+      "reason": "Not requested as part of fixing Gift 2 photos; appears to be ancillary scaffolding.",
+      "evidence": [
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/scripts/.gitkeep"
       ]
     }
   ],
-  "confidence": 0.62,
+  "confidence": 0.64,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/src/components/SafeGeneratedImage.tsx",
-    "frontend/src/screens/FinalCelebrationScreen.tsx",
-    "frontend/src/screens/GiftsScreen.tsx",
+    "frontend/DEPLOYMENT_RETRY_RUNBOOK.md",
+    "frontend/scripts/retry-deploy-and-capture-logs.sh",
     "project_state.json"
   ]
 }

@@ -1,12 +1,16 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
+  "projectStateVersion": 15,
   "summary": "Valentine-themed interactive website for girlfriend (Yashika) with pink UI, playful Yes/No interaction, multi-step gift reveal with balloons/photo animations, and final valentine message screen.",
   "architectural_notes": [
-    "Photo assets should be added as static files under frontend/public/assets and referenced via the existing configuration/constants (asset filenames) for Gift 2 (her photos), Gift 3 (couple photos), and the final hero photo."
+    "Photo assets should be added as static files under frontend/public/assets and referenced via the existing configuration/constants (asset filenames) for Gift 2 (her photos), Gift 3 (couple photos), and the final hero photo.",
+    "User provided additional photo assets; add them under frontend/public/assets and update the configured asset filename lists/constants so they appear in Gift 2 (her photos), Gift 3 (couple photos), and/or the final hero photo as appropriate.",
+    "Add the 3 new user-provided photos as static assets under frontend/public/assets and include their filenames in the Gift 2 (HER_PHOTOS) configuration/constants list so they render in Gift 2."
   ],
-  "known_issues": [],
-  "isFixRequest": false,
+  "known_issues": [
+    "User reports Gift 2 photos are not appearing on the website; placeholder photos still show instead of the 3 user-provided photos (likely static assets/config not updated or deployment not serving them)."
+  ],
+  "isFixRequest": true,
   "existing_features": [
     {
       "id": "feature-create-a-single-page-valentine-experience-with-a-3-step-flow-1-landing-question-screen-2-gifts-screen-with-3-gift-sections-3-final-celebration-screen-after-completion",
@@ -111,6 +115,54 @@
         "REQ-13"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-gift-1-love-letter-text-so-that-it-includes-the-exact-sentence-4-years-ago-you-came-into-my-life-as-an-angle-and-now-i-want-to-marry-that-angle-the-sentence-must-appear-in-the-rendered-gift-1-note-paragraph-the-love-note-content-shown-when-gift-1-is-opened",
+      "title": "Update the Gift 1 love letter text so that it includes the exact sentence: \"4 years ago you came into my life as an angle and now I want to marry that angle.\" The sentence must appear in the rendered Gift 1 note paragraph (the LOVE_NOTE content shown when Gift 1 is opened).",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-user-provided-photo-files-to-the-app-s-static-assets-folder-and-update-the-frontend-configuration-so-the-new-photos-appear-in-gift-2-her-photos-gift-3-couple-photos-and-the-final-celebration-photo",
+      "title": "Add the user-provided photo files to the app’s static assets folder and update the frontend configuration so the new photos appear in Gift 2 (Her Photos), Gift 3 (Couple Photos), and the Final Celebration photo.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-re-run-the-build-and-deployment-for-the-current-valentine-app-without-changing-app-features-and-if-deployment-fails-again-capture-and-report-the-full-deployment-error-output-so-the-failure-cause-can-be-diagnosed-and-fixed-in-a-follow-up-request",
+      "title": "Re-run the build and deployment for the current Valentine app without changing app features, and if deployment fails again, capture and report the full deployment error output so the failure cause can be diagnosed and fixed in a follow-up request.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-user-uploaded-image-files-img-0131-1-jpeg-img-4617-1-jpeg-and-img-0156-1-jpeg-to-the-static-assets-folder-used-by-the-app-so-they-are-served-at-assets-generated-filename",
+      "title": "Add the user-uploaded image files IMG_0131-1.jpeg, IMG_4617-1.jpeg, and IMG_0156-1.jpeg to the static assets folder used by the app so they are served at /assets/generated/<filename>.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-config-valentinecontent-ts-so-her-photos-uses-exactly-these-filenames-in-this-order-img-0131-1-jpeg-img-4617-1-jpeg-img-0156-1-jpeg-so-gift-2-displays-the-uploaded-photos",
+      "title": "Update frontend/src/config/valentineContent.ts so HER_PHOTOS uses exactly these filenames (in this order): ['IMG_0131-1.jpeg','IMG_4617-1.jpeg','IMG_0156-1.jpeg'] so Gift 2 displays the uploaded photos.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-rebuild-and-redeploy-the-frontend-after-verifying-the-assets-and-config-so-the-latest-static-files-are-included-and-validate-in-the-live-preview-that-gift-2-shows-the-3-user-photos-and-no-placeholder-photos",
+      "title": "Rebuild and redeploy the frontend after verifying the assets and config so the latest static files are included, and validate in the live preview that Gift 2 shows the 3 user photos and no placeholder photos.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -154,6 +206,40 @@
       "id": "AR-7",
       "summary": "After last gift is opened, show 'Click to done' button; on Done show final screen with couple photo and text 'i got my valentine' with a heart",
       "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Update Gift 1 note/letter text to include: \"4 years ago you came into my life as an angle and now I want to marry that angle.\"",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Make the website feel cuter by adding more emojis across the UI (while keeping the dark pink/light pink theme)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Add the 3 user-provided photos to Gift 2 (her photos gallery) by placing them in frontend/public/assets and updating the Gift 2 configured asset filename list/constants",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Ensure Gift 2 (\"Beautiful You\") displays only the user-provided 3 photos (and no placeholder photos) by confirming the Gift 2 gallery is driven by HER_PHOTOS from frontend/src/config/valentineContent.ts and that HER_PHOTOS is exactly: ['IMG_0131-1.jpeg','IMG_4617-1.jpeg','IMG_0156-1.jpeg'] in that order.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Ensure the static image assets IMG_0131-1.jpeg, IMG_4617-1.jpeg, and IMG_0156-1.jpeg are present in frontend/public/assets/generated/ with exact matching filenames/case, and that they are actually served by the deployed site at /assets/generated/<filename> so the images load instead of triggering the SafeGeneratedImage fallback.",
+      "reqIds": [
+        "REQ-20"
+      ],
       "status": "pending"
     }
   ],

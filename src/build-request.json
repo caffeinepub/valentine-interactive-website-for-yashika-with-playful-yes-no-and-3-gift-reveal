@@ -1,57 +1,80 @@
 {
   "kind": "build_request",
-  "title": "Add an in-app guide for replacing the placeholder photos",
+  "title": "Fix Gift 2 photos not showing and remove placeholder images",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-12",
-      "text": "Add a small, clearly labeled help entry point on the Gifts screen that explains (in English) how to add/replace photos used by Gift 2 (HER_PHOTOS), Gift 3 (COUPLE_PHOTOS), and the Final celebration photo (FINAL_COUPLE_PHOTO).",
+      "id": "REQ-19",
+      "text": "Ensure Gift 2 (\"Beautiful You\") displays only the user-provided 3 photos (and no placeholder photos) by confirming the Gift 2 gallery is driven by HER_PHOTOS from frontend/src/config/valentineContent.ts and that HER_PHOTOS is exactly: ['IMG_0131-1.jpeg','IMG_4617-1.jpeg','IMG_0156-1.jpeg'] in that order.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-4"
         ],
         "quotes": [
-          "Now i want to add photos how i do add photos in ghis website"
+          "Why the photo is not appear in website i want them appear remove the place holder photos and add my 3 photos i given u and i want them to appear in webiste"
         ]
       },
       "acceptanceCriteria": [
-        "On the Gifts screen, there is a visible control such as “How to add photos” / “Replace photos” that the user can click/tap.",
-        "Clicking/tapping the control opens an in-app help panel (modal/dialog/expandable section) with instructions written in English.",
-        "The instructions explicitly mention the folder path for images: frontend/public/assets/generated.",
-        "The instructions explicitly mention the config file and fields to edit: frontend/src/config/valentineContent.ts (HER_PHOTOS, COUPLE_PHOTOS, FINAL_COUPLE_PHOTO).",
-        "The instructions tell the user to use exact filenames (including extensions) and that the app reads images from /assets/generated/<filename> (matching the current implementation)."
+        "Gift 2 renders exactly 3 images (no placeholders) and they correspond to the 3 filenames in HER_PHOTOS, in order.",
+        "There are no other placeholder image filename references used for Gift 2 anywhere in the frontend code/config."
       ]
     },
     {
-      "id": "REQ-13",
-      "text": "Add graceful UI handling for missing/broken photo assets in the Gift 2 gallery, Gift 3 gallery, and Final celebration photo so the page does not look broken if a filename is wrong or an image is not uploaded yet.",
+      "id": "REQ-20",
+      "text": "Ensure the static image assets IMG_0131-1.jpeg, IMG_4617-1.jpeg, and IMG_0156-1.jpeg are present in frontend/public/assets/generated/ with exact matching filenames/case, and that they are actually served by the deployed site at /assets/generated/<filename> so the images load instead of triggering the SafeGeneratedImage fallback.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-4"
         ],
         "quotes": [
-          "Now i want to add photos how i do add photos in ghis website"
+          "Why the photo is not appear in website i want them appear remove the place holder photos and add my 3 photos i given u and i want them to appear in webiste"
         ]
       },
       "acceptanceCriteria": [
-        "If an image fails to load in Gift 2 or Gift 3, the UI shows a styled fallback area (matching the pink theme) with an English message like “Image not found: <filename>”.",
-        "If the final celebration photo fails to load, the UI shows a styled fallback area with an English message indicating the missing filename.",
-        "The rest of the flow remains usable and visually consistent when one or more images are missing."
+        "In the deployed app, directly opening each URL returns the image (not 404): /assets/generated/IMG_0131-1.jpeg, /assets/generated/IMG_4617-1.jpeg, /assets/generated/IMG_0156-1.jpeg.",
+        "When opening Gift 2 in the app, none of the three images show the \"Image not found\" fallback state."
+      ]
+    },
+    {
+      "id": "REQ-21",
+      "text": "Rebuild and redeploy the frontend after verifying the assets and config so the latest static files are included, and validate in the live preview that Gift 2 shows the 3 user photos and no placeholder photos.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "i want them to appear in webiste"
+        ]
+      },
+      "acceptanceCriteria": [
+        "After redeploy, Gift 2 shows the 3 user photos and no placeholder photos.",
+        "A quick post-deploy check confirms the three /assets/generated/*.jpeg URLs load successfully in the browser."
       ]
     }
   ],
   "constraints": [
-    "Do not modify any files under frontend/src/components/ui (Shadcn read-only components must be composed, not edited).",
-    "Do not edit immutable hook files (frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts) or frontend/src/main.tsx."
+    "Do not edit any files under frontend/src/components/ui (read-only components).",
+    "Keep the app as a static-asset-based photo gallery (no backend image hosting or external storage)."
   ],
   "nonGoals": [
-    "Do not add backend functionality or photo uploads/storage on the canister; photos remain static assets.",
-    "Do not change the existing Valentine flow (Landing → Gifts → Final) or the gift unlock logic."
+    "Do not change Gift 3 (couple photos) or the final celebration photo unless required to fix Gift 2 rendering.",
+    "Do not add new features beyond making the provided 3 photos appear correctly."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
   }
 }

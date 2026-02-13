@@ -1,49 +1,75 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "In-app guide for replacing placeholder photos + graceful missing-image fallbacks",
+  "title": "Fix Gift 2 photos rendering from HER_PHOTOS and ensure generated JPEG assets are served",
   "requirements": [
     {
-      "id": "REQ-12",
-      "summary": "Add a clearly labeled help entry point on the Gifts screen explaining how to replace Gift 2, Gift 3, and Final photo assets via config + generated assets folder.",
+      "id": "REQ-19",
+      "summary": "Make Gift 2 (\"Beautiful You\") render exactly the three user-provided photos from HER_PHOTOS in the specified order, with no placeholder photo references used for Gift 2.",
       "acceptanceCriteria": [
-        "On the Gifts screen, there is a visible control such as “How to add photos” / “Replace photos” that the user can click/tap.",
-        "Clicking/tapping the control opens an in-app help panel (modal/dialog/expandable section) with instructions written in English.",
-        "The instructions explicitly mention the folder path for images: frontend/public/assets/generated.",
-        "The instructions explicitly mention the config file and fields to edit: frontend/src/config/valentineContent.ts (HER_PHOTOS, COUPLE_PHOTOS, FINAL_COUPLE_PHOTO).",
-        "The instructions tell the user to use exact filenames (including extensions) and that the app reads images from /assets/generated/<filename> (matching the current implementation)."
+        "Gift 2 renders exactly 3 images (no placeholders) and they correspond to the 3 filenames in HER_PHOTOS, in order.",
+        "There are no other placeholder image filename references used for Gift 2 anywhere in the frontend code/config."
       ],
       "file_operations": [
         {
+          "path": "frontend/src/config/valentineContent.ts",
+          "operation": "modify",
+          "description": "Verify HER_PHOTOS is exactly ['IMG_0131-1.jpeg','IMG_4617-1.jpeg','IMG_0156-1.jpeg'] in that order, and remove/avoid any Gift 2 placeholder filename usage in this config if present."
+        },
+        {
           "path": "frontend/src/screens/GiftsScreen.tsx",
           "operation": "modify",
-          "description": "Add a small, clearly labeled help entry point (e.g., “How to add/replace photos”) near the Gifts screen header and implement an in-app help panel (expandable section or dialog) that provides English instructions. The instructions must explicitly reference: (1) image folder path frontend/public/assets/generated, (2) config file frontend/src/config/valentineContent.ts and fields HER_PHOTOS, COUPLE_PHOTOS, FINAL_COUPLE_PHOTO, and (3) using exact filenames (including extensions) because the app reads from /assets/generated/<filename>. Use existing shadcn-ui composed components already imported in this screen (e.g., the Button component) for the entry point styling; do not modify any files under frontend/src/components/ui. Verify the component's usage instructions before implementing."
+          "description": "Ensure the Gift 2 gallery is driven only by HER_PHOTOS (no hardcoded/placeholder arrays) and renders exactly the three items in order; audit and remove any Gift 2 placeholder filename references if present. Verify the component's usage instructions before implementing."
         }
       ]
     },
     {
-      "id": "REQ-13",
-      "summary": "Add graceful fallbacks for missing/broken images in Gift 2, Gift 3, and Final celebration photo so the UI remains usable and consistent.",
+      "id": "REQ-20",
+      "summary": "Ensure the three JPEGs exist under frontend/public/assets/generated with exact filenames/case so they are served at /assets/generated/<filename> and do not trigger SafeGeneratedImage fallback.",
       "acceptanceCriteria": [
-        "If an image fails to load in Gift 2 or Gift 3, the UI shows a styled fallback area (matching the pink theme) with an English message like “Image not found: <filename>”.",
-        "If the final celebration photo fails to load, the UI shows a styled fallback area with an English message indicating the missing filename.",
-        "The rest of the flow remains usable and visually consistent when one or more images are missing."
+        "In the deployed app, directly opening each URL returns the image (not 404): /assets/generated/IMG_0131-1.jpeg, /assets/generated/IMG_4617-1.jpeg, /assets/generated/IMG_0156-1.jpeg.",
+        "When opening Gift 2 in the app, none of the three images show the \"Image not found\" fallback state."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/SafeGeneratedImage.tsx",
+          "path": "frontend/public/assets/generated/IMG_0131-1.jpeg",
           "operation": "create",
-          "description": "Create a reusable 2D UI helper component that renders an image from the generated assets path and switches to a pink-themed fallback UI when the image fails to load. The fallback should display an English message including the missing filename (e.g., “Image not found: <filename>”) and preserve layout via configurable aspect ratio / sizing so the Gifts and Final screens do not look broken."
+          "description": "Add/ensure the static asset exists with this exact filename and casing so it is served as a public static file at /assets/generated/IMG_0131-1.jpeg."
         },
         {
-          "path": "frontend/src/screens/GiftsScreen.tsx",
-          "operation": "modify",
-          "description": "Replace the direct <img> usage in Gift 2 (HER_PHOTOS gallery) and Gift 3 (COUPLE_PHOTOS gallery) with the new SafeGeneratedImage component so broken/missing images show a styled fallback message that includes the filename, while keeping the existing gift unlock logic and flow unchanged."
+          "path": "frontend/public/assets/generated/IMG_4617-1.jpeg",
+          "operation": "create",
+          "description": "Add/ensure the static asset exists with this exact filename and casing so it is served as a public static file at /assets/generated/IMG_4617-1.jpeg."
         },
         {
-          "path": "frontend/src/screens/FinalCelebrationScreen.tsx",
+          "path": "frontend/public/assets/generated/IMG_0156-1.jpeg",
+          "operation": "create",
+          "description": "Add/ensure the static asset exists with this exact filename and casing so it is served as a public static file at /assets/generated/IMG_0156-1.jpeg."
+        },
+        {
+          "path": "frontend/src/components/SafeGeneratedImage.tsx",
           "operation": "modify",
-          "description": "Replace the direct <img> usage for the FINAL_COUPLE_PHOTO with the SafeGeneratedImage component so a missing/broken final photo renders a pink-themed fallback area that states the missing filename, without changing the existing Final screen layout and animations."
+          "description": "Confirm the public-path mapping remains compatible with static hosting (expects /assets/generated/<filename>) and that Gift 2 loads the three JPEGs without triggering fallback; adjust only if needed to match the static asset location."
+        }
+      ]
+    },
+    {
+      "id": "REQ-21",
+      "summary": "Update frontend deployment/build guidance to rebuild and redeploy with the verified assets/config and include a post-deploy validation checklist for Gift 2 and direct asset URLs.",
+      "acceptanceCriteria": [
+        "After redeploy, Gift 2 shows the 3 user photos and no placeholder photos.",
+        "A quick post-deploy check confirms the three /assets/generated/*.jpeg URLs load successfully in the browser."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/DEPLOYMENT_RETRY_RUNBOOK.md",
+          "operation": "modify",
+          "description": "Add a focused pre-deploy checklist (verify the three files exist under frontend/public/assets/generated with exact case) and a post-deploy validation checklist (open Gift 2 and directly load the three /assets/generated/*.jpeg URLs) to confirm latest static files are included."
+        },
+        {
+          "path": "frontend/scripts/retry-deploy-and-capture-logs.sh",
+          "operation": "modify",
+          "description": "Add a lightweight pre-build verification step that checks the presence of IMG_0131-1.jpeg, IMG_4617-1.jpeg, and IMG_0156-1.jpeg under frontend/public/assets/generated before building/deploying, to reduce redeploy cycles when assets are missing."
         }
       ]
     }

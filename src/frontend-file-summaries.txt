@@ -6,10 +6,16 @@
   "frontend/src/components/LayoutShell.tsx": "Layout wrapper providing consistent pink gradient background and footer with caffeine.ai attribution across all screens, now with proper Heart icon import from lucide-react.",
   "frontend/src/components/GiftCard.tsx": "Reusable gift card component with locked/unlocked/opened states, featuring gift box icon and smooth open animations.",
   "frontend/src/components/BalloonRiseAnimation.tsx": "Animated component displaying multiple balloons rising upward with staggered delays before revealing couple photos in Gift 3.",
-  "frontend/src/config/valentineContent.ts": "Centralized configuration file containing girlfriend name (Yashika), love note text, and all image filenames for easy content updates.",
+  "frontend/src/config/valentineContent.ts": "Centralized configuration file containing girlfriend name (Yashika), love note text with the romantic 4-year anniversary and marriage proposal line, and all image filenames including the three newly uploaded photos for Gift 2 (Her Photos).",
   "frontend/src/utils/randomPosition.ts": "Utility function calculating random positions within container bounds for the evasive \"No\" button behavior.",
   "frontend/src/index.css": "Global styles with custom dark pink/light pink OKLCH color system, Valentine-themed design tokens, and keyframe animations for fade-in, reveal, wiggle, and balloon-rise effects.",
   "frontend/tailwind.config.js": "Tailwind configuration extended with custom dark-pink and light-pink colors, display font family, and Valentine-specific design tokens.",
   "frontend/src/hooks/useQueries.ts": "Empty placeholder file as the app uses only static content without backend queries.",
-  "frontend/src/components/SafeGeneratedImage.tsx": "Reusable image component that loads images from the generated assets folder and displays a pink-themed fallback UI with the filename when an image fails to load or is missing."
+  "frontend/src/components/SafeGeneratedImage.tsx": "Reusable image component that loads images from the generated assets folder and displays a pink-themed fallback UI with the filename when an image fails to load or is missing.",
+  "frontend/DEPLOYMENT_RETRY_RUNBOOK.md": "Comprehensive deployment runbook with pre-deployment checklist to verify Gift 2 photos exist, manual and automated deployment steps, post-deployment validation procedures (visual verification and direct URL testing), and troubleshooting guide for missing image issues.",
+  "frontend/scripts/retry-deploy-and-capture-logs.sh": "Bash script that executes the complete deployment process with pre-build verification of the three Gift 2 photos (IMG_0131-1.jpeg, IMG_4617-1.jpeg, IMG_0156-1.jpeg), captures all stdout/stderr to a timestamped log file, and provides a post-deployment validation checklist.",
+  "frontend/scripts/.gitkeep": "Placeholder file to ensure the scripts directory is tracked in git.",
+  "frontend/public/assets/generated/IMG_0131-1.jpeg": "User-uploaded photo showing Yashika in a patterned sweater with glasses, to be displayed in Gift 2 gallery.",
+  "frontend/public/assets/generated/IMG_4617-1.jpeg": "User-uploaded close-up photo of Yashika with a nose piercing, to be displayed in Gift 2 gallery.",
+  "frontend/public/assets/generated/IMG_0156-1.jpeg": "User-uploaded photo of Yashika in a patterned sweater holding flowers at what appears to be a restaurant, to be displayed in Gift 2 gallery."
 }

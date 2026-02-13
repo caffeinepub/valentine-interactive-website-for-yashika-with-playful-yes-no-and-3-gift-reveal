@@ -1,11 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Add an in-app guide for replacing the placeholder photos, and ensure the UI stays usable if photo assets are missing or misnamed.
+**Goal:** Make Gift 2 (“Beautiful You”) reliably show the user’s three provided photos (and no placeholder images).
 
 **Planned changes:**
-- Add a small, clearly labeled help entry point on the Gifts screen (e.g., “How to add photos” / “Replace photos”) that opens an in-app help panel with English instructions.
-- In the help panel, document exactly where to place images (`frontend/public/assets/generated`), how they are referenced (`/assets/generated/<filename>`), and which config fields to edit in `frontend/src/config/valentineContent.ts` (`HER_PHOTOS`, `COUPLE_PHOTOS`, `FINAL_COUPLE_PHOTO`), including the need for exact filenames (with extensions).
-- Add graceful fallback UI for broken/missing images in the Gift 2 gallery, Gift 3 gallery, and the Final celebration photo, showing a styled (pink-theme) placeholder message like “Image not found: <filename>” while keeping the rest of the flow visually consistent and usable.
+- Update Gift 2 gallery to be driven only by `HER_PHOTOS` in `frontend/src/config/valentineContent.ts`, ensuring it is exactly `['IMG_0131-1.jpeg','IMG_4617-1.jpeg','IMG_0156-1.jpeg']` in that order.
+- Remove/replace any Gift 2 placeholder image filename references so Gift 2 renders only those three images.
+- Verify the three JPEG assets exist in `frontend/public/assets/generated/` with exact matching filenames/case and are served at `/assets/generated/<filename>`, then rebuild/redeploy and validate in the live preview.
 
-**User-visible outcome:** On the Gifts screen, users can open a built-in guide that explains how to replace the app’s photos, and if any photo filename is wrong or missing, the app shows a clear themed fallback message instead of looking broken.
+**User-visible outcome:** Gift 2 displays exactly 3 photos—the user-provided images—in the correct order, with no placeholder photos and no “Image not found” fallbacks.

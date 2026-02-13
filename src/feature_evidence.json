@@ -2,10 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-a-small-clearly-labeled-help-entry-point-on-the-gifts-screen-that-explains-in-english-how-to-add-replace-photos-used-by-gift-2-her-photos-gift-3-couple-photos-and-the-final-celebration-photo-final-couple-photo",
-      "featureTitle": "Add a small, clearly labeled help entry point on the Gifts screen that explains (in English) how to add/replace photos used by Gift 2 (HER_PHOTOS), Gift 3 (COUPLE_PHOTOS), and the Final celebration photo (FINAL_COUPLE_PHOTO).",
+      "featureId": "feature-rebuild-and-redeploy-the-frontend-after-verifying-the-assets-and-config-so-the-latest-static-files-are-included-and-validate-in-the-live-preview-that-gift-2-shows-the-3-user-photos-and-no-placeholder-photos",
+      "featureTitle": "Rebuild and redeploy the frontend after verifying the assets and config so the latest static files are included, and validate in the live preview that Gift 2 shows the 3 user photos and no placeholder photos.",
       "files": [
-        "frontend/src/screens/GiftsScreen.tsx"
+        "frontend/DEPLOYMENT_RETRY_RUNBOOK.md",
+        "frontend/scripts/retry-deploy-and-capture-logs.sh"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -15,27 +16,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-12"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-graceful-ui-handling-for-missing-broken-photo-assets-in-the-gift-2-gallery-gift-3-gallery-and-final-celebration-photo-so-the-page-does-not-look-broken-if-a-filename-is-wrong-or-an-image-is-not-uploaded-yet",
-      "featureTitle": "Add graceful UI handling for missing/broken photo assets in the Gift 2 gallery, Gift 3 gallery, and Final celebration photo so the page does not look broken if a filename is wrong or an image is not uploaded yet.",
-      "files": [
-        "frontend/src/components/SafeGeneratedImage.tsx",
-        "frontend/src/screens/FinalCelebrationScreen.tsx",
-        "frontend/src/screens/GiftsScreen.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-13"
+        "REQ-21"
       ],
       "confidence": "high"
     }
