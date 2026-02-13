@@ -1,0 +1,15 @@
+{
+  "frontend/src/App.tsx": "Main application component managing the three-step Valentine flow (landing, gifts, final) using React state without routing.",
+  "frontend/src/screens/LandingScreen.tsx": "Landing screen with Valentine question for Yashika, featuring a dark pink \"Yes\" button and an evasive light pink \"No\" button that repositions on hover/touch.",
+  "frontend/src/screens/GiftsScreen.tsx": "Gifts screen displaying three sequential gift cards with a help dialog button that provides detailed instructions on how to replace photos by editing the config file and adding images to the generated assets folder, now using SafeGeneratedImage for graceful error handling.",
+  "frontend/src/screens/FinalCelebrationScreen.tsx": "Final celebration screen showing a large couple photo with animated hearts, now using SafeGeneratedImage component for graceful handling of missing images.",
+  "frontend/src/components/LayoutShell.tsx": "Layout wrapper providing consistent pink gradient background and footer with caffeine.ai attribution across all screens, now with proper Heart icon import from lucide-react.",
+  "frontend/src/components/GiftCard.tsx": "Reusable gift card component with locked/unlocked/opened states, featuring gift box icon and smooth open animations.",
+  "frontend/src/components/BalloonRiseAnimation.tsx": "Animated component displaying multiple balloons rising upward with staggered delays before revealing couple photos in Gift 3.",
+  "frontend/src/config/valentineContent.ts": "Centralized configuration file containing girlfriend name (Yashika), love note text, and all image filenames for easy content updates.",
+  "frontend/src/utils/randomPosition.ts": "Utility function calculating random positions within container bounds for the evasive \"No\" button behavior.",
+  "frontend/src/index.css": "Global styles with custom dark pink/light pink OKLCH color system, Valentine-themed design tokens, and keyframe animations for fade-in, reveal, wiggle, and balloon-rise effects.",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with custom dark-pink and light-pink colors, display font family, and Valentine-specific design tokens.",
+  "frontend/src/hooks/useQueries.ts": "Empty placeholder file as the app uses only static content without backend queries.",
+  "frontend/src/components/SafeGeneratedImage.tsx": "Reusable image component that loads images from the generated assets folder and displays a pink-themed fallback UI with the filename when an image fails to load or is missing."
+}

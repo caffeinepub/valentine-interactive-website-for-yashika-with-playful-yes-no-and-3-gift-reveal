@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Valentine-themed interactive website for girlfriend (Yashika) with pink UI, playful Yes/No interaction, multi-step gift reveal with balloons/photo animations, and final valentine message screen.",
+  "architectural_notes": [
+    "Photo assets should be added as static files under frontend/public/assets and referenced via the existing configuration/constants (asset filenames) for Gift 2 (her photos), Gift 3 (couple photos), and the final hero photo."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-single-page-valentine-experience-with-a-3-step-flow-1-landing-question-screen-2-gifts-screen-with-3-gift-sections-3-final-celebration-screen-after-completion",
+      "title": "Create a single-page Valentine experience with a 3-step flow: (1) Landing question screen, (2) Gifts screen with 3 gift sections, (3) Final celebration screen after completion.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-landing-screen-ui-use-a-dark-pink-themed-background-and-render-two-large-buttons-a-dark-pink-yes-button-and-a-light-pink-no-button-the-question-text-must-be-in-english-and-include-the-name-yashika-e-g-will-you-be-my-valentine-yashika",
+      "title": "Landing screen UI: use a dark-pink themed background and render two large buttons: a dark-pink “Yes” button and a light-pink “No” button. The question text must be in English and include the name “Yashika” (e.g., “Will you be my Valentine, Yashika?”).",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-an-evasive-no-button-interaction-when-the-user-tries-to-hover-touch-click-the-no-button-it-shifts-to-a-new-position-so-it-cannot-be-selected",
+      "title": "Implement an evasive “No” button interaction: when the user tries to hover/touch/click the “No” button, it shifts to a new position so it cannot be selected.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-gifts-screen-after-selecting-yes-show-three-distinct-gift-sections-cards-gift-1-gift-2-gift-3-that-can-be-opened-one-by-one-in-order-gift-2-locked-until-gift-1-opened-gift-3-locked-until-gift-2-opened",
+      "title": "Gifts screen: after selecting “Yes”, show three distinct gift sections/cards (Gift 1, Gift 2, Gift 3) that can be opened one-by-one in order (Gift 2 locked until Gift 1 opened; Gift 3 locked until Gift 2 opened).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-gift-1-content-display-a-short-love-letter-note-in-english-include-the-user-provided-idea-i-give-it-to-you-as-a-letter-and-present-it-with-a-simple-reveal-animation-when-gift-1-is-opened",
+      "title": "Gift 1 content: display a short love letter/note in English (include the user-provided idea “I give it to you as a letter”) and present it with a simple reveal animation when Gift 1 is opened.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-gift-2-content-show-a-small-gallery-of-her-photos-only-implement-this-using-static-image-assets-placed-under-frontend-public-assets-use-provided-placeholder-images-until-the-user-replaces-them",
+      "title": "Gift 2 content: show a small gallery of “her photos only”. Implement this using static image assets placed under frontend/public/assets (use provided placeholder images until the user replaces them).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-gift-3-content-show-a-couple-photos-section-we-and-my-girl-photos-when-gift-3-is-opened-first-play-a-multi-balloon-rising-animation-multiple-balloons-moving-upward-and-only-after-the-balloons-animation-completes-reveal-the-couple-photos",
+      "title": "Gift 3 content: show a couple-photos section (“we and my girl” photos). When Gift 3 is opened, first play a multi-balloon rising animation (multiple balloons moving upward), and only after the balloons animation completes, reveal the couple photos.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-completion-after-the-last-gift-gift-3-is-opened-and-its-reveal-sequence-finishes-show-a-prominent-click-to-done-button-on-click-navigate-to-the-final-celebration-screen",
+      "title": "Completion: after the last gift (Gift 3) is opened and its reveal sequence finishes, show a prominent “Click to Done” button. On click, navigate to the Final celebration screen.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-final-celebration-screen-display-a-large-couple-photo-centered-and-below-it-show-the-english-text-i-got-my-valentine-followed-by-a-heart-symbol",
+      "title": "Final celebration screen: display a large couple photo centered, and below it show the English text “I got my valentine” followed by a heart symbol.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-one-coherent-creative-visual-theme-consistently-across-all-screens-using-dark-pink-light-pink-as-the-core-palette-avoid-blue-purple-define-typography-spacing-card-styles-and-button-styles-so-the-experience-feels-like-a-single-designed-product",
+      "title": "Apply one coherent, creative visual theme consistently across all screens using dark pink + light pink as the core palette (avoid blue/purple). Define typography, spacing, card styles, and button styles so the experience feels like a single designed product.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-small-configuration-section-constants-in-the-frontend-code-for-girlfriend-name-default-yashika-note-letter-text-and-the-asset-filenames-used-for-gift-2-gift-3-and-the-final-photo-so-the-content-can-be-updated-easily-without-changing-logic",
+      "title": "Add a small configuration section (constants) in the frontend code for: girlfriend name (default “Yashika”), note/letter text, and the asset filenames used for Gift 2, Gift 3, and the Final photo, so the content can be updated easily without changing logic.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-small-clearly-labeled-help-entry-point-on-the-gifts-screen-that-explains-in-english-how-to-add-replace-photos-used-by-gift-2-her-photos-gift-3-couple-photos-and-the-final-celebration-photo-final-couple-photo",
+      "title": "Add a small, clearly labeled help entry point on the Gifts screen that explains (in English) how to add/replace photos used by Gift 2 (HER_PHOTOS), Gift 3 (COUPLE_PHOTOS), and the Final celebration photo (FINAL_COUPLE_PHOTO).",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-graceful-ui-handling-for-missing-broken-photo-assets-in-the-gift-2-gallery-gift-3-gallery-and-final-celebration-photo-so-the-page-does-not-look-broken-if-a-filename-is-wrong-or-an-image-is-not-uploaded-yet",
+      "title": "Add graceful UI handling for missing/broken photo assets in the Gift 2 gallery, Gift 3 gallery, and Final celebration photo so the page does not look broken if a filename is wrong or an image is not uploaded yet.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Build Valentine landing page themed in dark pink/light pink for Yashika with prominent Yes and No options",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Implement evasive 'No' button behavior (moves/shift positions on hover/touch so it cannot be selected)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "On selecting 'Yes', open a new frame/page showing 3 gift sections",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Gift 1 content: note/letter ('I give it to u letter') reveal interaction",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Gift 2 content: photo section with only her photos",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Gift 3 content: photo section with couple ('we and my girl') photos, revealed after multiple balloons animation rises",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "After last gift is opened, show 'Click to done' button; on Done show final screen with couple photo and text 'i got my valentine' with a heart",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Valentine interactive website for Yashika with playful Yes/No and 3-gift reveal flow",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

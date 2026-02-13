@@ -1,0 +1,57 @@
+{
+  "kind": "build_request",
+  "title": "Add an in-app guide for replacing the placeholder photos",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-12",
+      "text": "Add a small, clearly labeled help entry point on the Gifts screen that explains (in English) how to add/replace photos used by Gift 2 (HER_PHOTOS), Gift 3 (COUPLE_PHOTOS), and the Final celebration photo (FINAL_COUPLE_PHOTO).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Now i want to add photos how i do add photos in ghis website"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On the Gifts screen, there is a visible control such as “How to add photos” / “Replace photos” that the user can click/tap.",
+        "Clicking/tapping the control opens an in-app help panel (modal/dialog/expandable section) with instructions written in English.",
+        "The instructions explicitly mention the folder path for images: frontend/public/assets/generated.",
+        "The instructions explicitly mention the config file and fields to edit: frontend/src/config/valentineContent.ts (HER_PHOTOS, COUPLE_PHOTOS, FINAL_COUPLE_PHOTO).",
+        "The instructions tell the user to use exact filenames (including extensions) and that the app reads images from /assets/generated/<filename> (matching the current implementation)."
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "text": "Add graceful UI handling for missing/broken photo assets in the Gift 2 gallery, Gift 3 gallery, and Final celebration photo so the page does not look broken if a filename is wrong or an image is not uploaded yet.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Now i want to add photos how i do add photos in ghis website"
+        ]
+      },
+      "acceptanceCriteria": [
+        "If an image fails to load in Gift 2 or Gift 3, the UI shows a styled fallback area (matching the pink theme) with an English message like “Image not found: <filename>”.",
+        "If the final celebration photo fails to load, the UI shows a styled fallback area with an English message indicating the missing filename.",
+        "The rest of the flow remains usable and visually consistent when one or more images are missing."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify any files under frontend/src/components/ui (Shadcn read-only components must be composed, not edited).",
+    "Do not edit immutable hook files (frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts) or frontend/src/main.tsx."
+  ],
+  "nonGoals": [
+    "Do not add backend functionality or photo uploads/storage on the canister; photos remain static assets.",
+    "Do not change the existing Valentine flow (Landing → Gifts → Final) or the gift unlock logic."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

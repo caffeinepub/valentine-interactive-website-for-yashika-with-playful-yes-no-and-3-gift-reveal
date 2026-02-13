@@ -1,0 +1,55 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-13T22:03:42.097Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 2,
+    "implemented": 2,
+    "items": [
+      {
+        "id": "REQ-12",
+        "summary": "Add a small, clearly labeled help entry point on the Gifts screen that explains (in English) how to add/replace photos used by Gift 2 (HER_PHOTOS), Gift 3 (COUPLE_PHOTOS), and the Final celebration photo (FINAL_COUPLE_PHOTO).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/screens/GiftsScreen.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/screens/GiftsScreen.tsx"
+        ]
+      },
+      {
+        "id": "REQ-13",
+        "summary": "Add graceful UI handling for missing/broken photo assets in the Gift 2 gallery, Gift 3 gallery, and Final celebration photo so the page does not look broken if a filename is wrong or an image is not uploaded yet.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/SafeGeneratedImage.tsx",
+          "frontend/src/screens/GiftsScreen.tsx",
+          "frontend/src/screens/FinalCelebrationScreen.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/SafeGeneratedImage.tsx",
+          "frontend/src/screens/GiftsScreen.tsx",
+          "frontend/src/screens/FinalCelebrationScreen.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "build-template/README.md",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/components/SafeGeneratedImage.tsx",
+    "frontend/src/screens/FinalCelebrationScreen.tsx",
+    "frontend/src/screens/GiftsScreen.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

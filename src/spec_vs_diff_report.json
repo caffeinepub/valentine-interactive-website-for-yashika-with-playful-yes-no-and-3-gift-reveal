@@ -1,0 +1,49 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-13T22:03:42.095Z",
+  "summary": "The diff adds an in-app help entry point on the Gifts screen via a dialog and introduces a SafeGeneratedImage component to provide graceful fallbacks for missing/broken images. However, due to truncation of GiftsScreen.tsx, some REQ-12 instruction details cannot be fully verified, and the fallback text formatting does not exactly match the example “Image not found: <filename>”.",
+  "missing_requirements": [
+    {
+      "id": "REQ-12",
+      "requirement": "Help instructions explicitly mention the config file and fields to edit: frontend/src/config/valentineContent.ts (HER_PHOTOS, COUPLE_PHOTOS, FINAL_COUPLE_PHOTO).",
+      "reason": "The GiftsScreen help dialog content is truncated before showing the referenced config file path and specific fields, so this cannot be confirmed from the provided diff summary.",
+      "evidence": [
+        "frontend/src/screens/GiftsScreen.tsx (truncated)"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "requirement": "Help instructions explicitly state that the app reads images from /assets/generated/<filename> (and to use exact filenames including extensions).",
+      "reason": "The dialog shows the folder path and mentions exact filenames, but the portion that would confirm an explicit statement about the runtime path pattern “/assets/generated/<filename>” is not visible due to truncation.",
+      "evidence": [
+        "frontend/src/screens/GiftsScreen.tsx (truncated)"
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "requirement": "Fallback message for missing images should be an English message like “Image not found: <filename>”.",
+      "reason": "SafeGeneratedImage renders “Image not found” and then renders the filename on a separate line, rather than a single message in the form “Image not found: <filename>”. This may not meet the stated acceptance criteria phrasing.",
+      "evidence": [
+        "frontend/src/components/SafeGeneratedImage.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "LayoutShell update to import/use Heart icon correctly (general UI fix not requested by REQ-12/REQ-13).",
+      "reason": "The BuildRequest only asks for an in-app guide and graceful missing-image handling; a LayoutShell Heart icon import fix is unrelated to those requirements.",
+      "evidence": [
+        "frontend-file-summaries.txt (mentions LayoutShell Heart icon import change)"
+      ]
+    }
+  ],
+  "confidence": 0.62,
+  "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/src/components/SafeGeneratedImage.tsx",
+    "frontend/src/screens/FinalCelebrationScreen.tsx",
+    "frontend/src/screens/GiftsScreen.tsx",
+    "project_state.json"
+  ]
+}

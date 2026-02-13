@@ -1,2 +1,3 @@
-# valentine-interactive-website-for-yashika-with-playful-yes-no-and-3-gift-reveal
-Exported from Caffeine project: Valentine interactive website for Yashika with playful Yes/No and 3-gift reveal flow
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

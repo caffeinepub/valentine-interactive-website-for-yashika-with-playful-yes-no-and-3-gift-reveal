@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.625rem;
+        --background: 0.98 0.02 10;
+        --foreground: 0.2 0.05 350;
+        --card: 1 0 0;
+        --card-foreground: 0.2 0.05 350;
+        --popover: 1 0 0;
+        --popover-foreground: 0.2 0.05 350;
+        --primary: 0.55 0.18 350;
+        --primary-foreground: 0.98 0 0;
+        --secondary: 0.92 0.08 350;
+        --secondary-foreground: 0.3 0.12 350;
+        --muted: 0.95 0.02 350;
+        --muted-foreground: 0.5 0.05 350;
+        --accent: 0.88 0.12 350;
+        --accent-foreground: 0.3 0.12 350;
+        --destructive: 0.577 0.245 27.325;
+        --destructive-foreground: 0.985 0 0;
+        --border: 0.9 0.05 350;
+        --input: 0.9 0.05 350;
+        --ring: 0.65 0.15 350;
+        --chart-1: 0.65 0.18 350;
+        --chart-2: 0.75 0.12 10;
+        --chart-3: 0.55 0.15 340;
+        --chart-4: 0.7 0.1 20;
+        --chart-5: 0.6 0.2 355;
+        --sidebar: 0.98 0.02 10;
+        --sidebar-foreground: 0.2 0.05 350;
+        --sidebar-primary: 0.55 0.18 350;
+        --sidebar-primary-foreground: 0.98 0 0;
+        --sidebar-accent: 0.92 0.08 350;
+        --sidebar-accent-foreground: 0.3 0.12 350;
+        --sidebar-border: 0.9 0.05 350;
+        --sidebar-ring: 0.65 0.15 350;
+        
+        /* Custom Valentine colors */
+        --dark-pink: 0.55 0.18 350;
+        --light-pink: 0.88 0.12 350;
+    }
+
+    .dark {
+        --background: 0.15 0.03 350;
+        --foreground: 0.95 0.02 350;
+        --card: 0.2 0.05 350;
+        --card-foreground: 0.95 0.02 350;
+        --popover: 0.18 0.04 350;
+        --popover-foreground: 0.95 0.02 350;
+        --primary: 0.75 0.15 350;
+        --primary-foreground: 0.15 0.03 350;
+        --secondary: 0.25 0.08 350;
+        --secondary-foreground: 0.95 0.02 350;
+        --muted: 0.25 0.05 350;
+        --muted-foreground: 0.65 0.05 350;
+        --accent: 0.35 0.12 350;
+        --accent-foreground: 0.95 0.02 350;
+        --destructive: 0.704 0.191 22.216;
+        --destructive-foreground: 0.15 0.03 350;
+        --border: 0.3 0.08 350;
+        --input: 0.3 0.08 350;
+        --ring: 0.6 0.12 350;
+        --chart-1: 0.7 0.18 350;
+        --chart-2: 0.8 0.12 10;
+        --chart-3: 0.6 0.15 340;
+        --chart-4: 0.75 0.1 20;
+        --chart-5: 0.65 0.2 355;
+        --sidebar: 0.2 0.05 350;
+        --sidebar-foreground: 0.95 0.02 350;
+        --sidebar-primary: 0.75 0.15 350;
+        --sidebar-primary-foreground: 0.15 0.03 350;
+        --sidebar-accent: 0.25 0.08 350;
+        --sidebar-accent-foreground: 0.95 0.02 350;
+        --sidebar-border: 0.3 0.08 350;
+        --sidebar-ring: 0.6 0.12 350;
+        
+        /* Custom Valentine colors for dark mode */
+        --dark-pink: 0.65 0.2 350;
+        --light-pink: 0.75 0.15 350;
+    }
+
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+@layer utilities {
+    .text-dark-pink {
+        color: oklch(var(--dark-pink));
+    }
+    
+    .bg-dark-pink {
+        background-color: oklch(var(--dark-pink));
+    }
+    
+    .text-light-pink {
+        color: oklch(var(--light-pink));
+    }
+    
+    .bg-light-pink {
+        background-color: oklch(var(--light-pink));
+    }
+    
+    .border-dark-pink {
+        border-color: oklch(var(--dark-pink));
+    }
+    
+    .border-light-pink {
+        border-color: oklch(var(--light-pink));
+    }
+}
+
+@layer components {
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes reveal {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    @keyframes wiggle {
+        0%, 100% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(-5deg);
+        }
+        75% {
+            transform: rotate(5deg);
+        }
+    }
+    
+    @keyframes balloon-rise {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-120vh) rotate(15deg);
+            opacity: 0;
+        }
+    }
+    
+    .animate-fade-in {
+        animation: fade-in 0.8s ease-out forwards;
+    }
+    
+    .animate-reveal {
+        animation: reveal 0.6s ease-out forwards;
+    }
+    
+    .animate-wiggle {
+        animation: wiggle 0.3s ease-in-out;
+    }
+    
+    .animate-balloon-rise {
+        animation: balloon-rise 4s ease-in forwards;
+    }
+}

@@ -1,0 +1,51 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "In-app guide for replacing placeholder photos + graceful missing-image fallbacks",
+  "requirements": [
+    {
+      "id": "REQ-12",
+      "summary": "Add a clearly labeled help entry point on the Gifts screen explaining how to replace Gift 2, Gift 3, and Final photo assets via config + generated assets folder.",
+      "acceptanceCriteria": [
+        "On the Gifts screen, there is a visible control such as “How to add photos” / “Replace photos” that the user can click/tap.",
+        "Clicking/tapping the control opens an in-app help panel (modal/dialog/expandable section) with instructions written in English.",
+        "The instructions explicitly mention the folder path for images: frontend/public/assets/generated.",
+        "The instructions explicitly mention the config file and fields to edit: frontend/src/config/valentineContent.ts (HER_PHOTOS, COUPLE_PHOTOS, FINAL_COUPLE_PHOTO).",
+        "The instructions tell the user to use exact filenames (including extensions) and that the app reads images from /assets/generated/<filename> (matching the current implementation)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/screens/GiftsScreen.tsx",
+          "operation": "modify",
+          "description": "Add a small, clearly labeled help entry point (e.g., “How to add/replace photos”) near the Gifts screen header and implement an in-app help panel (expandable section or dialog) that provides English instructions. The instructions must explicitly reference: (1) image folder path frontend/public/assets/generated, (2) config file frontend/src/config/valentineContent.ts and fields HER_PHOTOS, COUPLE_PHOTOS, FINAL_COUPLE_PHOTO, and (3) using exact filenames (including extensions) because the app reads from /assets/generated/<filename>. Use existing shadcn-ui composed components already imported in this screen (e.g., the Button component) for the entry point styling; do not modify any files under frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "summary": "Add graceful fallbacks for missing/broken images in Gift 2, Gift 3, and Final celebration photo so the UI remains usable and consistent.",
+      "acceptanceCriteria": [
+        "If an image fails to load in Gift 2 or Gift 3, the UI shows a styled fallback area (matching the pink theme) with an English message like “Image not found: <filename>”.",
+        "If the final celebration photo fails to load, the UI shows a styled fallback area with an English message indicating the missing filename.",
+        "The rest of the flow remains usable and visually consistent when one or more images are missing."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/SafeGeneratedImage.tsx",
+          "operation": "create",
+          "description": "Create a reusable 2D UI helper component that renders an image from the generated assets path and switches to a pink-themed fallback UI when the image fails to load. The fallback should display an English message including the missing filename (e.g., “Image not found: <filename>”) and preserve layout via configurable aspect ratio / sizing so the Gifts and Final screens do not look broken."
+        },
+        {
+          "path": "frontend/src/screens/GiftsScreen.tsx",
+          "operation": "modify",
+          "description": "Replace the direct <img> usage in Gift 2 (HER_PHOTOS gallery) and Gift 3 (COUPLE_PHOTOS gallery) with the new SafeGeneratedImage component so broken/missing images show a styled fallback message that includes the filename, while keeping the existing gift unlock logic and flow unchanged."
+        },
+        {
+          "path": "frontend/src/screens/FinalCelebrationScreen.tsx",
+          "operation": "modify",
+          "description": "Replace the direct <img> usage for the FINAL_COUPLE_PHOTO with the SafeGeneratedImage component so a missing/broken final photo renders a pink-themed fallback area that states the missing filename, without changing the existing Final screen layout and animations."
+        }
+      ]
+    }
+  ]
+}
